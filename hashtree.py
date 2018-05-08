@@ -28,7 +28,7 @@ class HashTree:
         self.transactions.append(tx)
 
     def tree(self):
-        return tree
+        return self.tree
 
     def root(self):
         return self.root
