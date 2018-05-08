@@ -13,23 +13,20 @@ class HashTree:
         length = len(txs) / 2 + len(txs) % 2
         
         for i in range(length):
+            # Hash the leaves
             left = sha256(txs[i]).hexdigest()
             right = sha256(txs[i + 1] or '').hexdigest()
-            # Save transaction hashes
-            self.hashes.append(left)
-            self.hashes.append(right)
+            # Save leaf node transaction hashes
+            if not transactions:
+                self.hashes.append(left)
+                self.hashes.append(right)
             # Combine nodes
             node = left + right
             # Hash nodes
             cache.append(sha256(node).hexdigest())
 
-        if len(cache) != 1:
+        if len(cache) is not 1:
             self.hash(cache)
         else:
             self.root = cache[0]
- 
-    def root(self):
-        return self.root
 
-    def hashes(self):
-        return self.hashes
