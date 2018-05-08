@@ -7,11 +7,8 @@ class HashTree:
         # Root hash
         self.root = None
         # Tree (e.g. [roothash, [h0, h1], [h0-0, h0-1, h1-0, h1-1]])
-        self.tree = []
-        # Hash leaf nodes
-        self.leaves()
+        self.tree = None
 
-    # Hash transaction data
     def leaves(self):
         leaf = []
         for tx in self.transactions:
@@ -42,9 +39,6 @@ class HashTree:
             self.hash(cache)
         # Otherwise set our root hash and quit iterating
         else:
-            # Replace transaction data with hashes for ease of use
-            self.transactions = self.tree[len(self.tree) - 1]
-            # Set root hash
             self.root = cache[0]
         
 
