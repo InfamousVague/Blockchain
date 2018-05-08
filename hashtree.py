@@ -5,6 +5,7 @@ class HashTree:
     def __init__(self, transactions=None):
         self.transactions = transactions
         self.root = None
+        self.hashes = []
 
     def hash(self, transactions=None):
         cache = []
@@ -12,9 +13,14 @@ class HashTree:
         length = len(txs) / 2 + len(txs) % 2
         
         for i in range(length):
-            left = txs[i]
-            right = txs[i + 1] or ''
-            node = sha256(left).hexdigest() + sha256(right).hexdigest()
+            left = sha256(txs[i]).hexdigest()
+            right = sha256(txs[i + 1] or '').hexdigest()
+            # Save transaction hashes
+            self.hashes.append(left)
+            self.hashes.append(right)
+            # Combine nodes
+            node = left + right
+            # Hash nodes
             cache.append(sha256(node).hexdigest())
 
         if len(cache) != 1:
@@ -24,3 +30,6 @@ class HashTree:
  
     def root(self):
         return self.root
+
+    def hashes(self):
+        return self.hashes
