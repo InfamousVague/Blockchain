@@ -29,3 +29,6 @@ class HashTree:
 
     def tree(self):
         return tree
+
+    def root(self):
+        return self.root
