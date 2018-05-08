@@ -4,7 +4,6 @@ class HashTree:
     
     def __init__(self, transactions=None):
         self.transactions = transactions
-        self.tree = []
         self.root = None
 
     def hash(self, transactions=None):
@@ -19,16 +18,9 @@ class HashTree:
             cache.append(sha256(node).hexdigest())
 
         if len(cache) != 1:
-            self.tree.append(cache)
             self.hash(cache)
         else:
             self.root = cache[0]
-
-    def new_transaction(self, tx):
-        self.transactions.append(tx)
-
-    def tree(self):
-        return self.tree
-
+ 
     def root(self):
         return self.root
