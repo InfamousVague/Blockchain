@@ -6,12 +6,7 @@ class Chain:
         self.limit = limit
         self.blocks = []
         self.pending_transactions = []
-
-    def info(self):
-        return {
-            blockheight: len(self.blocks)
-        }
-
+        
     def new_block(self):
         tree = HashTree(self.pending_transactions)
         tree.hash()
