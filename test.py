@@ -1,14 +1,25 @@
-from hashtree import HashTree
-import numpy as np
+from chain import Chain
+import os
+import threading
+
+def set_interval(func,time):
+    e = threading.Event()
+    while not e.wait(time):
+        func()
+
+chain = Chain(5)
 
 
-data = ['a', 'b', 'c', 'd']
-tree = HashTree(data)
-tree.hash()
+for i in range(50000):
+    chain.transact(os.urandom(40))
 
-print "Merkle Root: " + tree.root
-print "Transactions:"
-for hash in tree.transactions:
-    print hash
-print "Tree:"
-print(np.matrix(tree.tree))
+def log():
+    print "Blockheight: " + str(len(chain.blocks))
+    print "Last Mined: " + str(chain.blocks[0].timestamp)
+    print "Latest Block:"
+    print "\tRoot Hash:\n\t\t" + chain.blocks[0].roothash
+    print "\tTransactions:"
+    for tx in chain.blocks[0].transactions:
+        print "\t\t" + tx
+
+log()
