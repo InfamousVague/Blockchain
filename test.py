@@ -7,15 +7,19 @@ def set_interval(func,time):
     while not e.wait(time):
         func()
 
-chain = Chain(5)
+
+blocklimit = 300 # 200 byte limit
+sampletxs = 50000
+chain = Chain(blocklimit)
 
 
-for i in range(50000):
+for i in range(sampletxs):
     chain.transact(os.urandom(40))
 
 def log():
     print "Blockheight: " + str(len(chain.blocks))
     print "Last Mined: " + str(chain.blocks[0].timestamp)
+    print "Block Limit: " + str(blocklimit) + "bytes"
     print "Latest Block:"
     print "\tRoot Hash:\n\t\t" + chain.blocks[0].roothash
     print "\tTransactions:"

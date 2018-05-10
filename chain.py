@@ -1,16 +1,12 @@
 from hashtree import HashTree
 from block import Block
+from sys import getsizeof
 
 class Chain:
     def __init__(self, limit):
         self.limit = limit
         self.blocks = []
         self.pending_transactions = []
-
-    def info(self):
-        return {
-            blockheight: len(self.blocks)
-        }
 
     def new_block(self):
         tree = HashTree(self.pending_transactions)
@@ -20,6 +16,8 @@ class Chain:
         self.pending_transactions = []
 
     def transact(self, transaction):
-        self.pending_transactions.append(transaction)
-        if len(self.pending_transactions) is self.limit:
+        if getsizeof(self.pending_transactions + [transaction]) > self.limit:
             self.new_block()
+            self.pending_transactions = [transaction]
+        else:
+            self.pending_transactions.append(transaction)
