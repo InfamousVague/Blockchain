@@ -11,7 +11,8 @@ class Chain:
     def new_block(self):
         tree = HashTree(self.pending_transactions)
         tree.hash()
-        block = Block(tree.transactions, tree.root, tree.tree)
+        prevhash = len(self.blocks) > 0 and  self.blocks[-1].roothash or ''
+        block = Block(tree.transactions, tree.root, tree.tree, prevhash)
         self.blocks.append(block)
         self.pending_transactions = []
 

@@ -43,7 +43,7 @@ class HashTree:
         # Otherwise set our root hash and quit iterating
         else:
             # Replace transaction data with hashes for ease of use
-            self.transactions = self.tree[len(self.tree) - 1]
+            self.transactions = self.tree[-1]
             # Set root hash
             self.root = cache[0]
         

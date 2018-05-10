@@ -18,12 +18,13 @@ for i in range(sampletxs):
 
 def log():
     print "Blockheight: " + str(len(chain.blocks))
-    print "Last Mined: " + str(chain.blocks[0].timestamp)
+    print "Last Mined: " + str(chain.blocks[-1].timestamp)
     print "Block Limit: " + str(blocklimit) + "bytes"
     print "Latest Block:"
-    print "\tRoot Hash:\n\t\t" + chain.blocks[0].roothash
+    print "\tRoot Hash:\n\t\t" + chain.blocks[-1].roothash
+    print "\tPrev Hash:\n\t\t" + chain.blocks[-1].prevhash
     print "\tTransactions:"
-    for tx in chain.blocks[0].transactions:
+    for tx in chain.blocks[-1].transactions:
         print "\t\t" + tx
 
 log()
