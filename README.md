@@ -17,3 +17,14 @@ Latest Block:
 		0cd5694397f13c51dcb9d6e24aa9639a20a87f3373c058b357adb628bcdbf710
 		ef2ddd0e06c8efa3f421486e27289ba1145f42545c319fee866e3f914f69593c
 ```
+
+add mining
+
+find number where the roothash + some group of characters starts with x zeros where x is difficulty
+
+instead of automatically building blocks, take the last x transactions in while loop while transactions are less then block limit
+only accept new block if sha256(roothash + seed) = 000c3daf... where the number of proceeding zeros are equal to difficulty
+
+
+add real transactions such as sending tokens around
+add mining rewards
